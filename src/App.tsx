@@ -7,34 +7,36 @@ const NAV_LINKS = [
 
 const FEATURES = [
   {
-    icon: '🛣️',
     title: 'Route Mode',
-    desc: 'Apni gali ka route set karo — ek tap me delivery mark karo, ghar-ghar.',
+    desc: 'Route order ek baar set karo — app roz usi order me card-by-card chalega. Ek tap: "Deliver 1L". Agla customer khud aa jayega.',
+    iconType: 'dot' as const,
   },
   {
-    icon: '📅',
-    title: 'Kal ka doodh',
-    desc: 'Kal kisko kitna doodh dena hai — raat ko list ready, subah tension nahi.',
+    title: 'Kal ka doodh, aaj pata',
+    desc: 'Skips, pauses aur quantity changes adjust karke app khud bata dega — kal kitna cow milk, buffalo milk, curd lana hai. Na guess, na waste.',
+    iconType: 'text' as const,
+    iconText: '45L',
   },
   {
-    icon: '📲',
     title: 'WhatsApp pe bill',
-    desc: 'Ek button, customer ko WhatsApp pe PDF bill. Paise maangne me sharm nahi.',
+    desc: 'Pure mahine ke bill ek tap me bane. Branded PDF ke saath seedha customer ke WhatsApp pe. Payment aaya? Cash, UPI ya Bank — wahi record karo.',
+    iconType: 'whatsapp' as const,
   },
   {
-    icon: '👤',
     title: 'Customer ek tap me',
-    desc: 'Naam, phone, subscription, rate — sab ek jagah. Koi register palat-ne ki zarurat nahi.',
+    desc: 'Naam aur number dalo, ho gaya. Customer ko WhatsApp pe welcome message aur apna portal link khud chala jayega.',
+    iconType: 'text' as const,
+    iconText: '#1',
   },
   {
-    icon: '🔗',
     title: 'Customer khud sambhale',
-    desc: 'Link bhejo — customer khud delivery dekhe, bill check kare, paisa de. Aapka kaam kam.',
+    desc: 'Portal se customer khud pause, skip ya quantity change request kare — bina download, browser se. 6 baje ke phone call band.',
+    iconType: 'square' as const,
   },
   {
-    icon: '📊',
     title: 'Mahine ka report',
-    desc: 'Total doodh, total paisa, kitna baki — ek screen pe. CA ko bhejo ya khud dekho.',
+    desc: 'Total litre, revenue, collected, outstanding — sab ek screen pe, daily trend chart ke saath. Business ab andaaze pe nahi chalega.',
+    iconType: 'bars' as const,
   },
 ]
 
@@ -84,13 +86,14 @@ const FAQS = [
   },
 ]
 
-function Logo({ size = 40 }: { size?: number }) {
+function Logo({ size = 40, variant = 'dark' }: { size?: number; variant?: 'dark' | 'light' }) {
+  const isDark = variant === 'dark'
   return (
     <div
       style={{
         width: size,
         height: size,
-        backgroundColor: '#0f172a',
+        backgroundColor: isDark ? '#0f172a' : '#ffffff',
         borderRadius: size * 0.275,
         display: 'flex',
         alignItems: 'center',
@@ -100,7 +103,7 @@ function Logo({ size = 40 }: { size?: number }) {
     >
       <span
         style={{
-          color: '#fff',
+          color: isDark ? '#fff' : '#0f172a',
           fontSize: size * 0.55,
           fontWeight: 800,
           lineHeight: 1,
@@ -346,163 +349,37 @@ function Hero() {
           </div>
         </div>
 
-        {/* Phone mockup */}
-        <div
-          className="flex-1 flex justify-center lg:justify-end"
-          style={{ maxWidth: 480, width: '100%' }}
-        >
-          <div
-            style={{
-              width: 300,
-              height: 600,
-              backgroundColor: '#1e293b',
-              borderRadius: 40,
-              border: '4px solid #334155',
-              padding: 12,
-              position: 'relative',
-              overflow: 'hidden',
-            }}
-          >
-            {/* Status bar */}
-            <div
-              style={{
-                width: '100%',
-                height: 28,
-                borderRadius: '28px 28px 0 0',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <div
-                style={{
-                  width: 80,
-                  height: 22,
-                  backgroundColor: '#0f172a',
-                  borderRadius: 20,
-                }}
-              />
-            </div>
-            {/* Screen content */}
-            <div
-              style={{
-                backgroundColor: '#0f172a',
-                borderRadius: '0 0 28px 28px',
-                height: 'calc(100% - 28px)',
-                padding: '20px 16px',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 14,
-              }}
-            >
-              {/* Header */}
-              <div
-                className="flex items-center justify-between"
-                style={{ marginBottom: 4 }}
-              >
-                <div>
-                  <div
-                    style={{
-                      fontSize: 10,
-                      color: '#64748b',
-                      fontFamily: "'Manrope', sans-serif",
-                    }}
-                  >
-                    Route Mode
-                  </div>
-                  <div
-                    style={{
-                      fontSize: 16,
-                      fontWeight: 800,
-                      color: '#fff',
-                      fontFamily: "'Manrope', sans-serif",
-                    }}
-                  >
-                    Subah ka route
+        {/* Phone mockup — matching design spec */}
+        <div className="hidden lg:block" style={{ width: 340, flexShrink: 0, margin: '0 auto' }}>
+          <div style={{ background: '#1e293b', borderRadius: '40px 40px 0 0', padding: '10px 10px 0', boxShadow: '0 -24px 64px rgba(0,0,0,.4)' }}>
+            <div style={{ background: '#f8fafc', borderRadius: '32px 32px 0 0', overflow: 'hidden', height: 420 }} className="flex flex-col">
+              <div style={{ padding: '18px 18px 0' }} className="flex flex-col" >
+                <div className="flex items-center justify-between">
+                  <div style={{ fontSize: 18, fontWeight: 800, color: '#0f172a' }}>Morning round</div>
+                  <div style={{ background: '#0f172a', color: '#fff', borderRadius: 99, padding: '5px 12px', fontSize: 11, fontWeight: 800 }}>Route Mode</div>
+                </div>
+                <div className="flex flex-col" style={{ gap: 5, marginTop: 12 }}>
+                  <div style={{ fontSize: 14, fontWeight: 800, color: '#16a34a' }}>82/245 delivered</div>
+                  <div style={{ height: 7, background: '#e2e8f0', borderRadius: 99, overflow: 'hidden' }}>
+                    <div style={{ width: '33%', height: '100%', background: '#16a34a', borderRadius: 99 }} />
                   </div>
                 </div>
-                <div
-                  style={{
-                    backgroundColor: '#16a34a',
-                    color: '#fff',
-                    fontSize: 11,
-                    fontWeight: 700,
-                    padding: '5px 12px',
-                    borderRadius: 8,
-                    fontFamily: "'Manrope', sans-serif",
-                  }}
-                >
-                  4/12
-                </div>
-              </div>
-              {/* Customer list items */}
-              {[
-                { name: 'Ramesh Ji', qty: '1L', done: true },
-                { name: 'Sunita Devi', qty: '2L', done: true },
-                { name: 'Amit Sharma', qty: '0.5L', done: true },
-                { name: 'Priya Singh', qty: '1L', done: true },
-                { name: 'Mohan Lal', qty: '1.5L', done: false, active: true },
-                { name: 'Geeta Bai', qty: '1L', done: false },
-                { name: 'Suresh Kumar', qty: '2L', done: false },
-                { name: 'Kavita Ji', qty: '0.5L', done: false },
-              ].map((c, i) => (
-                <div
-                  key={i}
-                  className="flex items-center justify-between"
-                  style={{
-                    backgroundColor: c.active
-                      ? 'rgba(22,163,74,0.15)'
-                      : 'rgba(255,255,255,0.04)',
-                    borderRadius: 12,
-                    padding: '12px 14px',
-                    border: c.active ? '1px solid rgba(22,163,74,0.3)' : 'none',
-                  }}
-                >
-                  <div className="flex items-center" style={{ gap: 10 }}>
-                    <div
-                      style={{
-                        width: 22,
-                        height: 22,
-                        borderRadius: 6,
-                        backgroundColor: c.done ? '#16a34a' : 'transparent',
-                        border: c.done
-                          ? 'none'
-                          : '1.5px solid rgba(255,255,255,0.2)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                      }}
-                    >
-                      {c.done && (
-                        <span style={{ color: '#fff', fontSize: 13 }}>
-                          &#10003;
-                        </span>
-                      )}
+                <div style={{ background: '#ffffff', borderRadius: 18, padding: 18, boxShadow: '0 8px 24px rgba(15,23,42,.08)', marginTop: 12 }} className="flex flex-col" >
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <div style={{ fontSize: 18, fontWeight: 800, color: '#0f172a' }}>Sunita Verma</div>
+                      <div style={{ fontSize: 12, color: '#64748b', fontWeight: 600 }}>B-14, Shanti Nagar</div>
                     </div>
-                    <span
-                      style={{
-                        fontSize: 13,
-                        color: c.done ? '#64748b' : '#fff',
-                        fontWeight: 600,
-                        fontFamily: "'Manrope', sans-serif",
-                        textDecoration: c.done ? 'line-through' : 'none',
-                      }}
-                    >
-                      {c.name}
-                    </span>
+                    <div style={{ background: '#f1f5f9', color: '#0f172a', fontSize: 12, fontWeight: 800, borderRadius: 9, padding: '5px 9px' }}>#83</div>
                   </div>
-                  <span
-                    style={{
-                      fontSize: 12,
-                      color: '#64748b',
-                      fontWeight: 600,
-                      fontFamily: "'Manrope', sans-serif",
-                    }}
-                  >
-                    {c.qty}
-                  </span>
+                  <div className="flex items-center justify-between" style={{ borderTop: '2px solid #f1f5f9', paddingTop: 10, marginTop: 12 }}>
+                    <div style={{ fontSize: 13, fontWeight: 600, color: '#334155' }}>Cow Milk</div>
+                    <div style={{ fontSize: 13, fontWeight: 800, color: '#0f172a' }}>1L · ₹60</div>
+                  </div>
+                  <div style={{ background: '#16a34a', borderRadius: 12, padding: 14, textAlign: 'center', fontSize: 15, fontWeight: 800, color: '#fff', marginTop: 12 }}>Deliver 1L</div>
                 </div>
-              ))}
+                <div style={{ textAlign: 'center', fontSize: 12, color: '#64748b', fontWeight: 600, marginTop: 12 }}>Next: Rajesh Kumar · #84</div>
+              </div>
             </div>
           </div>
         </div>
@@ -653,16 +530,27 @@ function Features() {
                 style={{
                   width: 48,
                   height: 48,
-                  backgroundColor: '#0f172a',
+                  backgroundColor: f.iconType === 'whatsapp' ? '#25d366' : '#0f172a',
                   borderRadius: 14,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  fontSize: 22,
                   marginBottom: 20,
+                  gap: 3,
+                  paddingBottom: f.iconType === 'bars' ? 10 : 0,
                 }}
               >
-                {f.icon}
+                {f.iconType === 'dot' && <div style={{ width: 16, height: 16, background: '#16a34a', borderRadius: '50%' }} />}
+                {f.iconType === 'text' && <div style={{ fontSize: 15, fontWeight: 800, color: '#fff' }}>{f.iconText}</div>}
+                {f.iconType === 'whatsapp' && <div style={{ width: 18, height: 18, border: '3px solid #fff', borderRadius: '50%' }} />}
+                {f.iconType === 'square' && <div style={{ width: 16, height: 16, border: '3px solid #fff', borderRadius: 5 }} />}
+                {f.iconType === 'bars' && (
+                  <>
+                    <div style={{ width: 5, height: 10, background: '#fff', borderRadius: 2, alignSelf: 'flex-end' }} />
+                    <div style={{ width: 5, height: 16, background: '#fff', borderRadius: 2, alignSelf: 'flex-end' }} />
+                    <div style={{ width: 5, height: 22, background: '#16a34a', borderRadius: 2, alignSelf: 'flex-end' }} />
+                  </>
+                )}
               </div>
               <h3
                 style={{
@@ -1082,8 +970,8 @@ function FAQ() {
 function CtaDownload() {
   return (
     <section style={{ backgroundColor: '#0f172a', padding: '80px 24px' }}>
-      <div style={{ maxWidth: 600, margin: '0 auto', textAlign: 'center' }}>
-        <Logo size={72} />
+      <div style={{ maxWidth: 600, margin: '0 auto', textAlign: 'center' }} className="flex flex-col items-center">
+        <Logo size={72} variant="light" />
         <div style={{ marginTop: 28 }}>
           <h2
             style={{
@@ -1157,7 +1045,7 @@ function Footer() {
         className="flex flex-col sm:flex-row items-center justify-between"
       >
         <div className="flex items-center" style={{ gap: 10, marginBottom: 16 }}>
-          <Logo size={32} />
+          <Logo size={32} variant="light" />
           <span
             style={{
               fontSize: 14,
