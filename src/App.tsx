@@ -86,35 +86,8 @@ const FAQS = [
   },
 ]
 
-function Logo({ size = 40, variant = 'dark' }: { size?: number; variant?: 'dark' | 'light' }) {
-  const isDark = variant === 'dark'
-  return (
-    <div
-      style={{
-        width: size,
-        height: size,
-        backgroundColor: isDark ? '#0f172a' : '#ffffff',
-        borderRadius: size * 0.275,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexShrink: 0,
-      }}
-    >
-      <span
-        style={{
-          color: isDark ? '#fff' : '#0f172a',
-          fontSize: size * 0.55,
-          fontWeight: 800,
-          lineHeight: 1,
-          fontFamily: "'Manrope', sans-serif",
-        }}
-      >
-        Z
-      </span>
-    </div>
-  )
-}
+import { Logo } from './components/Logo'
+import { Footer } from './components/Footer'
 
 function Nav() {
   return (
@@ -134,23 +107,23 @@ function Nav() {
         style={{
           maxWidth: 1200,
           margin: '0 auto',
-          padding: '14px 24px',
+          padding: '14px 16px',
         }}
       >
-        <div className="flex items-center" style={{ gap: 10 }}>
-          <Logo size={40} />
+        <a href="/" className="flex items-center" style={{ gap: 8, textDecoration: 'none', flexShrink: 0 }}>
+          <Logo size={36} />
           <span
             style={{
-              fontSize: 22,
               fontWeight: 800,
               letterSpacing: '-0.5px',
               color: '#0f172a',
               fontFamily: "'Manrope', sans-serif",
             }}
+            className="text-lg sm:text-[22px]"
           >
             Zantro
           </span>
-        </div>
+        </a>
 
         <div className="hidden md:flex items-center" style={{ gap: 32 }}>
           {NAV_LINKS.map((link) => (
@@ -170,21 +143,55 @@ function Nav() {
           ))}
         </div>
 
-        <a
-          href="https://zantro.app/login"
-          style={{
-            backgroundColor: '#0f172a',
-            color: '#fff',
-            fontSize: 15,
-            fontWeight: 800,
-            padding: '12px 22px',
-            borderRadius: 12,
-            textDecoration: 'none',
-            fontFamily: "'Manrope', sans-serif",
-          }}
-        >
-          Free me shuru karo
-        </a>
+        <div className="flex items-center" style={{ gap: 12 }}>
+          <a
+            href="/for-customers"
+            style={{
+              fontSize: 13,
+              fontWeight: 600,
+              color: '#475569',
+              textDecoration: 'none',
+              fontFamily: "'Manrope', sans-serif",
+              whiteSpace: 'nowrap',
+            }}
+          >
+            For Customers
+          </a>
+          <a
+            href="https://zantro.app/login"
+            className="hidden sm:inline-block"
+            style={{
+              backgroundColor: '#0f172a',
+              color: '#fff',
+              fontSize: 15,
+              fontWeight: 800,
+              padding: '12px 22px',
+              borderRadius: 12,
+              textDecoration: 'none',
+              fontFamily: "'Manrope', sans-serif",
+              whiteSpace: 'nowrap',
+            }}
+          >
+            Free me shuru karo
+          </a>
+          <a
+            href="https://zantro.app/login"
+            className="sm:hidden"
+            style={{
+              backgroundColor: '#0f172a',
+              color: '#fff',
+              fontSize: 13,
+              fontWeight: 800,
+              padding: '10px 14px',
+              borderRadius: 10,
+              textDecoration: 'none',
+              fontFamily: "'Manrope', sans-serif",
+              whiteSpace: 'nowrap',
+            }}
+          >
+            Shuru karo
+          </a>
+        </div>
       </div>
     </nav>
   )
@@ -1028,60 +1035,6 @@ function CtaDownload() {
         </div>
       </div>
     </section>
-  )
-}
-
-function Footer() {
-  return (
-    <footer
-      style={{
-        backgroundColor: '#0f172a',
-        borderTop: '1px solid #1e293b',
-        padding: '40px 24px',
-      }}
-    >
-      <div
-        style={{ maxWidth: 1200, margin: '0 auto' }}
-        className="flex flex-col sm:flex-row items-center justify-between"
-      >
-        <div className="flex items-center" style={{ gap: 10, marginBottom: 16 }}>
-          <Logo size={32} variant="light" />
-          <span
-            style={{
-              fontSize: 14,
-              color: '#64748b',
-              fontFamily: "'Manrope', sans-serif",
-            }}
-          >
-            &copy; 2026 Zantro &middot; zantro.in
-          </span>
-        </div>
-        <div
-          className="flex flex-wrap justify-center"
-          style={{ gap: 24 }}
-        >
-          {[
-            { label: 'Privacy', href: '#' },
-            { label: 'Terms', href: '#' },
-            { label: 'support@zantro.in', href: 'mailto:support@zantro.in' },
-            { label: 'WhatsApp support', href: '#' },
-          ].map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              style={{
-                fontSize: 14,
-                color: '#64748b',
-                textDecoration: 'none',
-                fontFamily: "'Manrope', sans-serif",
-              }}
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-      </div>
-    </footer>
   )
 }
 
