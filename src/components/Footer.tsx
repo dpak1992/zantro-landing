@@ -30,7 +30,7 @@ export function Footer() {
           style={{ gap: 24 }}
         >
           {[
-            { label: 'Privacy', href: '#' },
+            { label: 'Privacy', href: '/privacy' },
             { label: 'Terms', href: '#' },
             { label: 'support@zantro.in', href: 'mailto:support@zantro.in' },
             { label: 'WhatsApp support', href: '#' },
