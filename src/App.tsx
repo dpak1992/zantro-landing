@@ -1001,7 +1001,7 @@ function CtaDownload() {
             style={{ gap: 14 }}
           >
             <a
-              href="https://play.google.com/store/apps"
+              href="https://play.google.com/store/apps/details?id=com.zantro"
               style={{
                 backgroundColor: '#16a34a',
                 color: '#fff',
