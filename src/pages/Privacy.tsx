@@ -77,7 +77,7 @@ const SECTIONS = [
     title: '6. Data Retention',
     content: [
       {
-        text: 'We retain your data for as long as your account is active or as needed to provide our services. If you wish to delete your account and associated data, please contact us at support@zantro.in. Vendor-created customer data will be deleted along with the vendor\u2019s account.',
+        text: <>We retain your data for as long as your account is active or as needed to provide our services. If you wish to delete your account and associated data, you can <a href="/delete-account" style={{ color: '#16a34a', fontWeight: 700, textDecoration: 'none' }}>request account deletion here</a> or contact us at support@zantro.in. Vendor-created customer data will be deleted along with the vendor&rsquo;s account.</>,
       },
     ],
   },
@@ -89,7 +89,7 @@ const SECTIONS = [
         list: [
           'Access the personal data we hold about you',
           'Request correction of inaccurate data',
-          'Request deletion of your account and data',
+          <><a href="/delete-account" style={{ color: '#16a34a', fontWeight: 700, textDecoration: 'none' }}>Request deletion of your account and data</a></>,
           'Withdraw consent for data processing (which may limit your ability to use the service)',
         ],
       },
